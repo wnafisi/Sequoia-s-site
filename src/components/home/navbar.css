@@ -1,4 +1,4 @@
-/* desktop-x-small */
+/* desktop-x-small
 @media all and (min-width: 0) and (max-width: 480px) {
     .navbar-dimensions {
         height: 56px;
@@ -18,7 +18,7 @@
     }
 }
 
-/* desktop-small */
+desktop-small
 @media all and (min-width: 481px) and (max-width: 840px) {
     .navbar-dimensions {
         height: 56px;
@@ -45,7 +45,7 @@
 }
 
 /* desktop-medium */
-@media all and (min-width: 841px) {
+/* @media all and (min-width: 841px) {
     .navbar-dimensions {
         height: 88px;
         width: 100%;
@@ -73,8 +73,8 @@
     z-index: 100;
 
     display: flex;
-    justify-content: center; /* align horizontal */
-    align-items: center; /* align vertical */
+    justify-content: center; 
+    align-items: center; 
 
     font-family: 'Montserrat', sans-serif;
     font-size: 11px;
@@ -161,4 +161,4 @@
     50% { background-color: rgba(255, 193, 7, 0.2); }
     75% { background-color: rgba(255, 87, 34, 0.2); }
     100% { background-color: rgba(33, 150, 243, 0.2); }
-}
+}  */

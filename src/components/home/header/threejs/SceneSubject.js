@@ -1,56 +1,76 @@
 import * as THREE from 'three'
-import alphaTexture from '../../../../assets/textures/stripes_gradient.jpg';
 
 export default scene => {    
+    // Create an empty scene
     const group = new THREE.Group();
 
-    const subjectGeometry = deformGeometry(new THREE.IcosahedronGeometry(10, 2));
+        //BEGInning
+        // Create the canvas with a renderer
+        // var renderer = new THREE.WebGLRenderer({antialias: true});
+
+        // // Specify the size of the canvas
+        // renderer.setSize( window.innerWidth, window.innerHeight );
+
+        // // Add the canvas to the DOM
+        // document.body.appendChild( renderer.domElement );
+        /**
+        * Image
+        **/
+        // Create a texture loader so we can load our image file
+        var loader = new THREE.TextureLoader();
+
+        // Load an image file into a custom material
+        var material = new THREE.MeshLambertMaterial({
+        map: loader.load('https://i.imgur.com/aueBjie.jpg')
+        });
+
+        // create a plane geometry for the image with a width of 10
+        // and a height that preserves the image's aspect ratio
+        // var geometry = new THREE.PlaneGeometry(7, 14);
+        var geometry = new THREE.BoxGeometry(14, 7, 7);
+
+
+        // combine our image geometry and material into a mesh
+        var mesh = new THREE.Mesh(geometry, material);
+
+        // set the position of the image mesh in the x,y,z dimensions
+        mesh.position.set(0,0,0)
+
+        // add the image to the scene
+        scene.add(mesh);
+
     
-    const subjectMaterial = new THREE.MeshStandardMaterial({ color: "#000", transparent: true, side: THREE.DoubleSide, alphaTest: 0.5 });
-    subjectMaterial.alphaMap = new THREE.TextureLoader().load(alphaTexture);
-    subjectMaterial.alphaMap.magFilter = THREE.NearestFilter;
-    subjectMaterial.alphaMap.wrapT = THREE.RepeatWrapping;
-    subjectMaterial.alphaMap.repeat.y = 1;
 
-    const subjectMesh = new THREE.Mesh(subjectGeometry, subjectMaterial);
-        
-    const subjectWireframe = new THREE.LineSegments(
-        new THREE.EdgesGeometry(subjectGeometry),
-        new THREE.LineBasicMaterial()
-    );
+    // Create a Cube Mesh with basic material
+    var geometry = new THREE.BoxGeometry( 18, 11, 1 );
+    var material = new THREE.MeshLambertMaterial( { color: "yellow" } );
+    var cube = new THREE.Mesh( geometry, material );
 
-    group.add(subjectMesh);
-    group.add(subjectWireframe);
-    scene.add(group);
+    // Create a Cube Mesh with basic material
+    var geometry2 = new THREE.BoxGeometry( 1, 11, 18 );
+    var material2 = new THREE.MeshLambertMaterial( { color: "blue" } );
+    var cube2 = new THREE.Mesh( geometry2, material2 );
+    
 
-    group.rotation.z = Math.PI/4;
+    // Add cube to Scene
+    group.add( cube );
+    group.add( cube2 );
+    // scene.add(group);
 
-    const speed = 0.02;
-    const textureOffsetSpeed = 0.02;
-
-    function deformGeometry(geometry) {
-        for (let i=0; i<geometry.vertices.length; i+=2) {
-            const scalar = 1 + Math.random()*0.8;
-            geometry.vertices[i].multiplyScalar(scalar)
-        }
-
-        return geometry;
-    }
+    const speed = 0.0;
 
     function update(time) {
         const angle = time*speed;
 
         group.rotation.y = angle;
+    }
 
-        subjectMaterial.alphaMap.offset.y = 0.55 + time * textureOffsetSpeed;
-
-        subjectWireframe.material.color.setHSL( Math.sin(angle*2), 0.5, 0.5 );
-        
-        const scale = (Math.sin(angle*8)+6.4)/5;
-        subjectWireframe.scale.set(scale, scale, scale)
+    function updateRotationSpeed(inputSpeed) {
+        const speed = inputSpeed;
     }
 
     return {
-        update
+        update,
+        updateRotationSpeed
     }
 }

@@ -2,11 +2,11 @@
     height: 100%;
     width: 100%;
 
-    overflow-y: auto;
-    overflow-x: hidden;
+    /* overflow-y: auto;
+    overflow-x: hidden; */
 
-    margin: 0;
-    padding: 0;
+    /* margin: 0;
+    padding: 0; */
 }
 
 .work {
@@ -33,4 +33,9 @@
 .route-fade-exit.route-fade-exit-active {
 	opacity: 0;
 	transition: opacity 0ms ease-in-out;
+}
+
+canvas {
+    height: 100% !important;
+    width: 100% !important;
 }
